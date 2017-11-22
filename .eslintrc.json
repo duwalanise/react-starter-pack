@@ -1,6 +1,7 @@
 {
-  "extends": "airbnb",
-  "plugins": ["react", "jsx-a11y", "import", "babel", "jest"],
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["react", "jsx-a11y", "import", "flowtype", "jest"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "comma-dangle": [
@@ -15,6 +16,7 @@
     ]
   },
   "globals": {
-    "document": true
+    "document": true,
+    "window": true
   }
 }

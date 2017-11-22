@@ -25,6 +25,8 @@
     "flow": "flow"
   },
   "devDependencies": {
+    "eslint-config-prettier": "^2.8.0",
+    "eslint-plugin-flowtype": "^2.39.1",
     "flow-bin": "^0.59.0"
   }
 }

@@ -1,12 +1,11 @@
+// @flow
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 function querystring(name, url = window.location.href) {
-  name = name.replace(/[[]]/g, '\\$&');
-
-  const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i');
+  const newName = name.replace(/[[]]/g, '\\$&');
+  const regex = new RegExp(`[?&]${newName}(=([^&#]*)|&|#|$)`, 'i');
   const results = regex.exec(url);
-
   if (!results) {
     return null;
   }

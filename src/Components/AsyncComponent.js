@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default (asyncComponent = importComponent => {
+const asyncComponent = importComponent => {
   class AsyncComponent extends Component {
     state = {
       component: null
@@ -10,7 +10,7 @@ export default (asyncComponent = importComponent => {
       const { default: component } = await importComponent();
 
       this.setState({
-        component: component
+        component
       });
     }
 
@@ -22,4 +22,6 @@ export default (asyncComponent = importComponent => {
   }
 
   return AsyncComponent;
-});
+};
+
+export default asyncComponent;
