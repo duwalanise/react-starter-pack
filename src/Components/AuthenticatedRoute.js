@@ -1,10 +1,11 @@
+// @flow
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-export default ({ component: C, props: cProps, ...rest }) => (
+export default ({ component: C, props: cProps, ...rest }: { component: any, props: Object }) => (
   <Route
     {...rest}
-    render={props =>
+    render={(props: { location: Object }) =>
       cProps.isAuthenticated ? (
         <C {...props} {...cProps} />
       ) : (

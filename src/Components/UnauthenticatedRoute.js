@@ -1,8 +1,8 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-function querystring(name, url = window.location.href) {
+const querystring = (name, url = window.location.href) => {
   const newName = name.replace(/[[]]/g, '\\$&');
   const regex = new RegExp(`[?&]${newName}(=([^&#]*)|&|#|$)`, 'i');
   const results = regex.exec(url);
@@ -14,9 +14,9 @@ function querystring(name, url = window.location.href) {
   }
 
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
+};
 
-export default ({ component: C, props: cProps, ...rest }) => {
+export default ({ component: C, props: cProps, ...rest }: { component: any, props: Object }) => {
   const redirect = querystring('redirect');
   return (
     <Route

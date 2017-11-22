@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
@@ -5,7 +6,7 @@ import Routes from '../../Routes';
 import RouteNavItem from '../../Components/RouteNavItem';
 import './index.css';
 
-class App extends Component {
+class App extends Component<{ history: Object }, { isAuthenticated: boolean }> {
   state = {
     isAuthenticated: false
   };
@@ -14,7 +15,7 @@ class App extends Component {
     this.setState({ isAuthenticated: authenticated });
   };
 
-  handleLogout = event => {
+  handleLogout = () => {
     this.userHasAuthenticated(false);
     this.props.history.push('/login');
   };

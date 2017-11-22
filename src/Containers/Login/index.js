@@ -1,8 +1,12 @@
+// @flow
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import './index.css';
 
-export default class Login extends Component {
+export default class Login extends Component<
+  { userHasAuthenticated: Function },
+  { email: string, password: string }
+> {
   state = {
     email: '',
     password: ''
@@ -12,13 +16,13 @@ export default class Login extends Component {
     return this.state.email.length > 0 && this.state.password.length > 0;
   }
 
-  handleChange = event => {
+  handleChange = (event: Object) => {
     this.setState({
       [event.target.id]: event.target.value
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event: Object) => {
     event.preventDefault();
     this.props.userHasAuthenticated(true);
   };
@@ -38,18 +42,9 @@ export default class Login extends Component {
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
             <ControlLabel>Password</ControlLabel>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
+            <FormControl value={this.state.password} onChange={this.handleChange} type="password" />
           </FormGroup>
-          <Button
-            block
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-          >
+          <Button block bsSize="large" disabled={!this.validateForm()} type="submit">
             Login
           </Button>
         </form>
