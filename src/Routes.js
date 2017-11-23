@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import AuthenticatedRoute from './Components/AuthenticatedRoute';
-import UnauthenticatedRoute from './Components/UnauthenticatedRoute';
-import asyncComponent from './Components/AsyncComponent';
+import AuthenticatedRoute from './Components/authenticatedRoute';
+import UnauthenticatedRoute from './Components/unauthenticatedRoute';
+import asyncComponent from './Components/asyncComponent';
 
 const AsyncHome = asyncComponent(() => import('./Containers/Home'));
 const AsyncLogin = asyncComponent(() => import('./Containers/Login'));

@@ -2,28 +2,26 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import Routes from '../../Routes';
-import RouteNavItem from '../../Components/RouteNavItem';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Routes from '../../routes';
+import RouteNavItem from '../../Components/routeNavItem';
+import { userLogout, userLogin } from './action';
 import './index.css';
 
-class App extends Component<{ history: Object }, { isAuthenticated: boolean }> {
-  state = {
-    isAuthenticated: false
-  };
-
-  userHasAuthenticated = authenticated => {
-    this.setState({ isAuthenticated: authenticated });
-  };
-
+class App extends Component<
+  { history: Object, isAuthenticated: boolean, userLogout: Function, userLogin: Function },
+  { isAuthenticated: boolean }
+> {
   handleLogout = () => {
-    this.userHasAuthenticated(false);
+    this.props.userLogout();
     this.props.history.push('/login');
   };
 
   render() {
     const childProps = {
-      isAuthenticated: this.state.isAuthenticated,
-      userHasAuthenticated: this.userHasAuthenticated
+      isAuthenticated: this.props.isAuthenticated,
+      userLogin: this.props.userLogin
     };
     return (
       <div className="App container">
@@ -36,7 +34,7 @@ class App extends Component<{ history: Object }, { isAuthenticated: boolean }> {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav pullRight>
-              {this.state.isAuthenticated ? (
+              {this.props.isAuthenticated ? (
                 <NavItem onClick={this.handleLogout}>Logout</NavItem>
               ) : (
                 [
@@ -57,4 +55,9 @@ class App extends Component<{ history: Object }, { isAuthenticated: boolean }> {
   }
 }
 
-export default withRouter(App);
+export default withRouter(connect(
+  store => ({
+    isAuthenticated: store.currentUser.isAuthenticated
+  }),
+  dispatch => bindActionCreators({ userLogout, userLogin }, dispatch)
+)(App));

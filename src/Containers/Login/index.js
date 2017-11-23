@@ -4,7 +4,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import './index.css';
 
 export default class Login extends Component<
-  { userHasAuthenticated: Function },
+  { userLogin: Function },
   { email: string, password: string }
 > {
   state = {
@@ -24,7 +24,7 @@ export default class Login extends Component<
 
   handleSubmit = (event: Object) => {
     event.preventDefault();
-    this.props.userHasAuthenticated(true);
+    this.props.userLogin(this.state);
   };
 
   render() {
